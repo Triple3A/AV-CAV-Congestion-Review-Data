@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "Please cite this repository and the accompanying review if you use these data."
+title: "AV/CAV congestion review data"
+type: dataset
+authors:
+  - family-names: "Ataee Naeini"
+    given-names: "Amirali"
+  - family-names: "Teymouri"
+    given-names: "Ashkan"
+  - family-names: "Zhang"
+    given-names: "Michael H."
+version: 1.0.0
+date-released: 2026-08-19
+license: CC-BY-4.0
+keywords:
+  - autonomous vehicles
+  - connected automated vehicles
+  - congestion mitigation
+  - traffic flow
+  - freeway bottlenecks
+  - mixed traffic
+  - traffic control

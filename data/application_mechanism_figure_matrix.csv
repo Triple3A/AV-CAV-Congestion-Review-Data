@@ -1,0 +1,9 @@
+﻿application,Stop-and-go waves,String instability,Congestion onset / breakdown,Capacity drop,Queue formation / discharge,Lane-changing friction,Merging turbulence,Physical spillback,Shifted / redistributed congestion,common_design_methods,typical_facilities
+Traffic smoothing / mobile-actuator control,○,○,●,●,●,●,□,○,—,rule-based/control law; optimal control; MPC; RL/MARL,RR/SL; COR; FB; RM; SG; LD
+Speed harmonization / dynamic headway / bottleneck-inflow regulation,●,○,○,○,●,○,○,○,—,rule-based/control law; RL/MARL; optimal control; MPC,FB; COR; RM; LD; RR/SL; NET
+Lane assignment / lane-use control,—,—,●,●,○,●,○,—,—,optimal control; rule-based/control law; other/unspecified; game-theoretic,FB; COR; NET; RM; WV; LD
+Cooperative merging / coordinated gap creation / ramp coordination,○,—,●,○,●,●,●,—,□,optimal control; MPC; other/unspecified; RL/MARL,RM; FB; COR; LD; RR/SL; NET
+Integrated longitudinal–lateral bottleneck control,●,—,○,○,○,○,●,—,—,optimal control; MPC; RL/MARL; rule-based/control law,FB; RM; COR; LD; WV; WZ
+Platooning,□,—,●,●,○,●,○,—,—,other/unspecified; optimal control,RM; FB; COR; LD; RR/SL
+Routing / dynamic traffic assignment / managed-lane operation,○,—,●,○,○,—,○,□,○,other/unspecified; optimal control; MPC,NET; RM; COR; RR/SL; FB
+Perimeter/corridor control / fleet rebalancing,—,—,—,—,—,—,—,—,○,MPC; optimal control; other/unspecified,NET
