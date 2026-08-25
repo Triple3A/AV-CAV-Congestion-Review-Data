@@ -14,9 +14,9 @@ Multiple applicable values are separated with semicolons.
 
 The retained literature is classified by its role in the review:
 
-- **Included as direct evidence** — evaluates an AV/CAV-executed or coordinated action with a congestion-relevant collective traffic-flow outcome.
-- **Included as mechanism-supporting evidence** — explains a relevant congestion mechanism, interaction, or feasible control action without directly establishing AV/CAV congestion mitigation.
-- **Included only as system context** — informs deployment boundaries, network feedback, demand response, or broader system consequences.
+- **Included as direct evidence [D]** — evaluates an AV/CAV-executed or coordinated action with a congestion-relevant collective traffic-flow outcome.
+- **Included as mechanism-supporting evidence [M]** — explains a relevant congestion mechanism, interaction, or feasible control action without directly establishing AV/CAV congestion mitigation.
+- **Included only as system context [C]** — informs deployment boundaries, network feedback, demand response, or broader system consequences.
 
 ## AV/CAV decision lever
 
