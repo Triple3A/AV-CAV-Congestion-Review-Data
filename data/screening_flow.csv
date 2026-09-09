@@ -1,5 +1,5 @@
 ﻿stage,records_entering,records_removed,records_remaining,principal_reason
-Candidate discovery,254,0,254,Candidate records identified through AI-assisted discovery and citation tracing.
-Manual bibliographic verification and deduplication,254,38,216,"Duplicate, substantially overlapping, or unverifiable AI-suggested records."
-Manual eligibility assessment,216,125,91,Outside review scope or insufficient relevance to the final manuscript-level synthesis.
-Final retained manuscript corpus,91,0,91,Publications retained in the current manuscript and represented in retained_corpus.csv.
+Candidate discovery and final targeted literature update,259,0,259,"Candidate records identified through AI-assisted discovery, citation tracing, and the final targeted literature update; rediscovered records already in the verified matrix were not double-counted."
+Manual bibliographic verification and deduplication,259,38,221,"Duplicate, substantially overlapping, or unverifiable records."
+Manual eligibility assessment,221,125,96,Outside review scope or insufficient relevance to the final manuscript-level synthesis.
+Final retained manuscript corpus,96,0,96,Publications retained in the final manuscript and represented in retained_corpus.csv.
