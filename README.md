@@ -37,13 +37,13 @@ Study-level audit used to support the application–mechanism map.
 ### `data/manuscript_reference_match_audit.csv`
 Reference-level audit showing how the papers cited in the manuscript were matched to the screening matrix or separately verified.
 
-### `figures/figureS1/Figure_S1_matrix.csv` 
+### `figures/FigureS1/Figure_S1_matrix.csv` 
 Contains the plotted counts. 
 
-### `figures/figureS1/Figure_S1_cell_membership.csv` 
+### `figures/FigureS1/Figure_S1_cell_membership.csv` 
 Lists contributing corpus IDs for each cell. 
 
-### `figures/figureS1/corpus_profile_counts.csv` 
+### `figures/FigureS1/corpus_profile_counts.csv` 
 Contains the marginal counts used in Section 2.
 
 Reproduce with Python, numpy, and matplotlib: `python build_figure_s1.py /path/to/retained_corpus.csv`.
