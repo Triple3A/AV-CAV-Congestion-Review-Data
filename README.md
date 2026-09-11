@@ -37,6 +37,17 @@ Study-level audit used to support the application–mechanism map.
 ### `data/manuscript_reference_match_audit.csv`
 Reference-level audit showing how the papers cited in the manuscript were matched to the screening matrix or separately verified.
 
+### `figures/figureS1/Figure_S1_matrix.csv` 
+Contains the plotted counts. 
+
+### `figures/figureS1/Figure_S1_cell_membership.csv` 
+Lists contributing corpus IDs for each cell. 
+
+### `figures/figureS1/corpus_profile_counts.csv` 
+Contains the marginal counts used in Section 2.
+
+Reproduce with Python, numpy, and matplotlib: `python build_figure_s1.py /path/to/retained_corpus.csv`.
+
 ## Coding structure
 
 The review separates several concepts that are often grouped together in AV/CAV studies:
@@ -65,6 +76,11 @@ The synthesis map uses the following markers:
 - **—** no substantive relationship identified in the coded support set
 
 The marker assignment is a structured qualitative synthesis rather than a meta-analysis or numerical ranking. More detail is provided in [`docs/evidence_map_method.md`](docs/evidence_map_method.md).
+
+## Figure S1 - Evidence settings across AV/CAV congestion-control application families
+Cells report numbers of retained studies coded to each application–evidence-setting combination. Application and evidence-setting fields are multi-label, so counts are non-exclusive and should not be summed as independent study totals.
+
+The eight application labels and six evidence-setting labels are matched exactly after splitting the existing fields on semicolons and trimming whitespace. Each study is counted once per cell. Eighty of 96 records have at least one listed application. Five records have no label matching the six controlled evidence settings; their original values are recorded in source_provenance.json. A zero is a zero coded combination, not a statement that no evidence exists outside this corpus. No facility bins, role changes, or quality/maturity scores are introduced.
 
 ## Notes on source availability
 
