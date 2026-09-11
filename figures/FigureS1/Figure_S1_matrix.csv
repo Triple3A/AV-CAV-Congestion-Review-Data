@@ -1,0 +1,9 @@
+operational_application,Analytical/theoretical,Simulation,Test-track experiment,Field experiment,Observational/open-road data,Network/demand model
+Traffic smoothing / mobile-actuator control,13,18,2,3,0,0
+Speed harmonization / dynamic headway / bottleneck-inflow regulation,20,36,0,1,0,0
+Lane assignment / lane-use control,2,4,0,0,0,0
+Cooperative merging / coordinated gap creation / ramp coordination,9,16,0,0,0,0
+Integrated longitudinal–lateral bottleneck control,10,18,0,0,0,0
+Platooning,2,3,0,0,0,0
+Routing / dynamic traffic assignment / managed-lane operation,5,8,0,0,0,7
+Perimeter/corridor control / fleet rebalancing,1,1,0,0,0,1
