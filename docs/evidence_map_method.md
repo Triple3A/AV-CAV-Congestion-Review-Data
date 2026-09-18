@@ -6,21 +6,25 @@ The map is intended as a qualitative evidence summary, not a meta-analysis.
 
 ## Marker assignment
 
+Direct support is cell-specific. A study contributes to `direct_supporting_study_count` only when it is coded to the relevant operational application family, directly evaluates or reports the relevant congestion mechanism or a mechanism-specific outcome, and provides a traffic-flow or congestion outcome supporting that relationship. Classification as [D] denotes direct evidence for at least one coded congestion-control claim and does not imply direct support for every Figure 2 cell.
+
 **● Direct, repeated support**
 
-Used when the application directly targets the mechanism and the retained literature contains repeated support without an explicit negative or mixed finding under the current coding rule.
+Requires `direct_supporting_study_count >= 2` and broadly consistent coded direct findings, with no direct-supporting study reporting an explicit negative, mixed, or strongly conditional result for that cell.
 
 **○ Direct, limited or mixed support**
 
-Used when a direct relationship is present but support is limited to a small number of studies, restricted settings, or mixed/conditional findings.
+Requires `direct_supporting_study_count >= 1` and either `direct_supporting_study_count = 1` or at least one negative, mixed, or strongly conditional direct finding.
 
 **□ Indirect relationship**
 
-Used when the application can affect the mechanism through another traffic process, behavioral response, facility interaction, or network-feedback pathway rather than targeting it directly.
+Requires `direct_supporting_study_count = 0` and `indirect_supporting_study_count >= 1`.
 
 **— No substantive relationship identified**
 
-Used when no meaningful direct or indirect application–mechanism relationship was identified in the coded support set.
+Requires `direct_supporting_study_count = 0` and `indirect_supporting_study_count = 0`.
+
+Marker categories describe the pattern of support in the retained coded set, not methodological quality, field validation, causal certainty across settings, deployment readiness, or treatment-effect magnitude. Several consistent simulation studies may therefore yield ● while the evidence setting remains simulation. A dash indicates only that no substantive relationship was identified in the retained corpus.
 
 ## Supporting information
 
