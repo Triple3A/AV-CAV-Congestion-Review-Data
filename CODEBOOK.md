@@ -6,6 +6,8 @@ This version documents the 97-publication retained corpus after the TRID update,
 
 Multiple applicable values are separated with semicolons. Values are study-specific and are not inferred from technology labels or keywords. `Not applicable` means a field does not conceptually apply. `Not clearly specified` denotes unresolved taxonomy coding. The comparator field uses the exact missing-value label `Not clearly reported`. Existing source-availability labels are preserved in other fields where appropriate.
 
+Figure 2 groups related operational applications into eight application families for synthesis. Application family is a display grouping, not an additional taxonomy dimension.
+
 ## Review role
 
 [D] direct congestion evidence, [M] mechanism-supporting evidence, and [C] contextual/system evidence remain the three retained review roles. [F] identifies foundational theory as a subtype of [M], not a fourth eligibility category or taxonomy dimension. Role and evidence setting remain distinct from inferential scope and methodological quality.
