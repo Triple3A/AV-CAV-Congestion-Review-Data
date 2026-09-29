@@ -1,21 +1,146 @@
-"""Generate descriptive counts without recoding the source matrix.
+"""Supplementary Figure S1: application family x evidence setting (non-exclusive unique-study counts).
 
-Run with Python, numpy, and matplotlib installed:
-  python build_figure_s1.py /path/to/retained_corpus.csv
+Rows    : application families from Table S5 (final study-level application-mechanism audit). A study counts
+          once in a family when it has at least one DIRECT or INDIRECT relationship coded to that family.
+Columns : the six controlled evidence settings, taken from each study's `evidence_setting` in Table S2
+          (final retained corpus).
+Families and settings are both non-exclusive, so rows and columns do not sum to the corpus or audit totals.
+
+Usage:
+    python build_figure_s1.py data/study_application_mechanism_audit.csv data/retained_corpus.csv [output_dir]
+
+Outputs: Figure_S1.png (600 dpi), Figure_S1.svg, Figure_S1.pdf, Figure_S1_matrix.csv,
+         Figure_S1_cell_membership.csv, corpus_profile_counts.csv, source_provenance.json
 """
 import csv
 import hashlib
 import json
+import os
+import re
 import sys
-from pathlib import Path
+from collections import defaultdict
 
 import matplotlib
+
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import numpy as np
+from matplotlib.colors import LinearSegmentedColormap
+from matplotlib.patches import Rectangle
 
-SOURCE_URL = 'https://github.com/Triple3A/AV-CAV-Congestion-Review-Data/blob/main/data/retained_corpus.csv'
-APPLICATIONS = [
+AUDIT = sys.argv[1] if len(sys.argv) > 1 else 'data/study_application_mechanism_audit.csv'
+CORPUS = sys.argv[2] if len(sys.argv) > 2 else 'data/retained_corpus.csv'
+OUT_DIR = sys.argv[3] if len(sys.argv) > 3 else os.path.dirname(os.path.abspath(__file__))
+STEM = 'Figure_S1'
+
+FAMILIES = [
+    'Traffic smoothing / mobile actuator',
+    'Speed harmonization / dynamic headway / bottleneck-inflow regulation',
+    'Lane assignment / lane-use control',
+    'Cooperative merging / coordinated gap creation / ramp coordination',
+    'Integrated longitudinal–lateral bottleneck control',
+    'Platooning',
+    'Routing / dynamic traffic assignment / managed-lane operation',
+    'Perimeter / corridor / fleet rebalancing',
+]
+ROW_LABELS = [
+    'Traffic smoothing /\nmobile actuator',
+    'Speed harmonization /\ndynamic headway /\nbottleneck-inflow regulation',
+    'Lane assignment /\nlane-use control',
+    'Cooperative merging /\ncoordinated gap creation /\nramp coordination',
+    'Integrated longitudinal–\nlateral bottleneck control',
+    'Platooning',
+    'Routing / dynamic traffic\nassignment / managed-lane\noperation',
+    'Perimeter / corridor /\nfleet rebalancing',
+]
+SETTINGS = ['Simulation', 'Analytical/theoretical', 'Network/demand model', 'Field experiment',
+            'Test-track experiment', 'Observational/open-road data']
+COL_LABELS = ['Simulation', 'Analytical/\ntheoretical', 'Network/\ndemand\nmodel', 'Field\nexperiment',
+              'Test-track\nexperiment', 'Observational/\nopen-road\ndata']
+
+FONT = 'Liberation Sans'
+ROW_FS, COL_FS, CELL_FS, NOTE_FS = 8.5, 8.5, 9.0, 8.0
+GRID_COLOR = '#2B5F8A'
+CMAP = LinearSegmentedColormap.from_list('s1', ['#FFFFFF', '#2F6FAE'])
+MM = 72 / 25.4
+FIG_W = 180 * MM
+
+
+def read(path):
+    with open(path, encoding='utf-8-sig', newline='') as f:
+        return list(csv.DictReader(f))
+
+
+def settings_of(value):
+    """Map a study-level evidence_setting string to the six controlled settings."""
+    parts = {p.strip().lower() for p in re.split(r'[;|]', value or '') if p.strip()}
+    return [s for s in SETTINGS if s.lower() in parts]
+
+
+def count(audit, corpus):
+    by_title = {r['title'].strip().lower(): r for r in corpus}
+    by_doi = {r['doi_or_stable_url'].strip().lower(): r for r in corpus if r['doi_or_stable_url'].strip()}
+    members = defaultdict(set)
+    study_settings, unassigned, cid = {}, set(), {}
+    for r in audit:
+        if r['support_directness'] not in ('DIRECT', 'INDIRECT'):
+            continue
+        members[r['application_family']].add(r['study_id'])
+        if r['study_id'] not in study_settings:
+            c = by_doi.get(r['doi_or_stable_identifier'].strip().lower()) or by_title.get(r['title'].strip().lower())
+            if c is None:
+                raise SystemExit(f"{r['study_id']} not found in Table S2")
+            study_settings[r['study_id']] = settings_of(c['evidence_setting'])
+            cid[r['study_id']] = c['corpus_id']
+            if not study_settings[r['study_id']]:
+                unassigned.add(f"{r['study_id']} ({r['citation_key']})")
+    unknown = set(members) - set(FAMILIES)
+    if unknown:
+        raise SystemExit(f'Unknown families in audit: {unknown}')
+    matrix = [[sum(s in study_settings[sid] for sid in members[f]) for s in SETTINGS] for f in FAMILIES]
+    totals = [len(members[f]) for f in FAMILIES]
+    return matrix, totals, sorted(unassigned), members, study_settings, cid
+
+
+def draw(matrix, totals):
+    plt.rcParams.update({'font.family': FONT, 'svg.fonttype': 'none', 'pdf.fonttype': 42, 'axes.linewidth': 0})
+    label_w, cell_w, n_gap, n_w = 50 * MM, 17.5 * MM, 4 * MM, 15 * MM
+    cell_h, head_h, pad = 12.5 * MM, 15 * MM, 2 * MM
+    grid_w = cell_w * len(SETTINGS)
+    fig_h = head_h + cell_h * len(FAMILIES) + 2 * pad
+    fig = plt.figure(figsize=(FIG_W / 72, fig_h / 72))
+    ax = fig.add_axes([0, 0, 1, 1])
+    ax.set_xlim(0, FIG_W)
+    ax.set_ylim(fig_h, 0)
+    ax.axis('off')
+    x0 = FIG_W - pad - n_w - n_gap - grid_w
+    y0 = pad + head_h
+    vmax = max(max(row) for row in matrix)
+    for i, row in enumerate(matrix):
+        y = y0 + i * cell_h
+        ax.text(x0 - 2.5 * MM, y + cell_h / 2, ROW_LABELS[i], ha='right', va='center', fontsize=ROW_FS, linespacing=1.1)
+        for j, v in enumerate(row):
+            x = x0 + j * cell_w
+            face = CMAP(v / vmax) if v else '#FFFFFF'
+            ax.add_patch(Rectangle((x, y), cell_w, cell_h, facecolor=face, edgecolor=GRID_COLOR, linewidth=0.6,
+                                   gid=f'cell_r{i}_c{j}'))
+            ax.text(x + cell_w / 2, y + cell_h / 2, str(v), ha='center', va='center', fontsize=CELL_FS,
+                    color='white' if v / vmax > 0.6 else ('#9A9A9A' if v == 0 else 'black'))
+        nx = x0 + grid_w + n_gap
+        ax.add_patch(Rectangle((nx, y), n_w, cell_h, facecolor='#F2F2F2', edgecolor=GRID_COLOR, linewidth=0.6))
+        ax.text(nx + n_w / 2, y + cell_h / 2, str(totals[i]), ha='center', va='center', fontsize=CELL_FS,
+                fontweight='bold')
+    ax.add_patch(Rectangle((x0, y0), grid_w, cell_h * len(FAMILIES), facecolor='none', edgecolor=GRID_COLOR,
+                           linewidth=1.1))
+    for j, lab in enumerate(COL_LABELS):
+        ax.text(x0 + (j + 0.5) * cell_w, y0 - 2 * MM, lab, ha='center', va='bottom', fontsize=COL_FS, linespacing=1.1)
+    ax.text(x0 + grid_w + n_gap + n_w / 2, y0 - 2 * MM, 'Studies\nin family', ha='center', va='bottom',
+            fontsize=COL_FS, linespacing=1.1, fontweight='bold')
+    return fig
+
+
+ROLES = {'Included as direct evidence': '[D]', 'Included as mechanism-supporting evidence': '[M]',
+         'Included only as system context': '[C]'}
+CODEBOOK_FAMILIES = [
     'Traffic smoothing / mobile-actuator control',
     'Speed harmonization / dynamic headway / bottleneck-inflow regulation',
     'Lane assignment / lane-use control',
@@ -25,131 +150,77 @@ APPLICATIONS = [
     'Routing / dynamic traffic assignment / managed-lane operation',
     'Perimeter/corridor control / fleet rebalancing',
 ]
-SETTINGS = ['Analytical/theoretical', 'Simulation', 'Test-track experiment',
-            'Field experiment', 'Observational/open-road data', 'Network/demand model']
-ROLES = {'Included as direct evidence': '[D]',
-         'Included as mechanism-supporting evidence': '[M]',
-         'Included only as system context': '[C]'}
-CAPTION = ('Figure S1. Evidence settings across AV/CAV congestion-control application families. '
-           'Cells report numbers of retained studies coded to each application–evidence-setting combination. '
-           'Application and evidence-setting fields are multi-label, so counts are non-exclusive '
-           'and should not be summed as independent study totals.')
 
-def labels(record, field):
-    return {value.strip() for value in record[field].split(';') if value.strip()}
 
-source = Path(sys.argv[1])
-out = Path(__file__).resolve().parent
-records = list(csv.DictReader(source.open(encoding='utf-8-sig', newline='')))
-assert len(records) == 96
-assert len({r['corpus_id'] for r in records}) == 96
-application_sets = [labels(r, 'operational_application') for r in records]
-setting_sets = [labels(r, 'evidence_setting') for r in records]
-matrix = np.array([[sum(a in aa and e in ee for aa, ee in zip(application_sets, setting_sets))
-                    for e in SETTINGS] for a in APPLICATIONS], dtype=int)
-with (out / 'Figure_S1_matrix.csv').open('w', encoding='utf-8', newline='') as f:
-    writer = csv.writer(f)
-    writer.writerow(['operational_application'] + SETTINGS)
-    writer.writerows([[a] + row.tolist() for a, row in zip(APPLICATIONS, matrix)])
+def write_csv(path, header, rows):
+    with open(path, 'w', newline='', encoding='utf-8') as f:
+        w = csv.writer(f)
+        w.writerow(header)
+        w.writerows(rows)
 
-with (out / 'corpus_profile_counts.csv').open('w', encoding='utf-8', newline='') as f:
-    writer = csv.writer(f)
-    writer.writerow(['dimension', 'category', 'study_count', 'percent_of_96'])
-    for role, label in ROLES.items():
-        n = sum(r['review_role'] == role for r in records)
-        writer.writerow(['review_role', label, n, f'{n/96*100:.1f}'])
-    for setting in SETTINGS:
-        n = sum(setting in ss for ss in setting_sets)
-        writer.writerow(['evidence_setting', setting, n, f'{n/96*100:.1f}'])
-    for application in APPLICATIONS:
-        n = sum(application in aa for aa in application_sets)
-        writer.writerow(['operational_application', application, n, ''])
-    writer.writerow(['coverage', 'At least one operational-application family',
-                     sum(bool(set(APPLICATIONS) & aa) for aa in application_sets), ''])
-    writer.writerow(['coverage', 'No controlled evidence-setting label',
-                     sum(not (set(SETTINGS) & ss) for ss in setting_sets), ''])
 
-# Study identifiers make each plotted count independently traceable.
-with (out / 'Figure_S1_cell_membership.csv').open('w', encoding='utf-8', newline='') as f:
-    writer = csv.writer(f)
-    writer.writerow(['operational_application', 'evidence_setting', 'study_count', 'corpus_ids'])
-    for a in APPLICATIONS:
-        for e in SETTINGS:
-            ids = [r['corpus_id'] for r, aa, ee in zip(records, application_sets, setting_sets)
-                   if a in aa and e in ee]
-            writer.writerow([a, e, len(ids), '; '.join(ids)])
+def profile(corpus):
+    """Corpus-level marginal counts reported in Section 2.1 (from Table S2)."""
+    n = len(corpus)
+    rows = []
+    for role, lab in ROLES.items():
+        k = sum(r['review_role'] == role for r in corpus)
+        rows.append(['review_role', lab, k, f'{100 * k / n:.1f}'])
+    sets = [settings_of(r['evidence_setting']) for r in corpus]
+    for s in SETTINGS:
+        k = sum(s in ss for ss in sets)
+        rows.append(['evidence_setting', s, k, f'{100 * k / n:.1f}'])
+    apps = [{p.strip() for p in r['operational_application'].split(';') if p.strip()} for r in corpus]
+    for a in CODEBOOK_FAMILIES:
+        rows.append(['operational_application', a, sum(a in aa for aa in apps), ''])
+    rows.append(['coverage', 'At least one operational-application family',
+                 sum(bool(set(CODEBOOK_FAMILIES) & aa) for aa in apps), ''])
+    review = [r['evidence_setting'].strip().startswith('Not applicable') for r in corpus]
+    rows.append(['coverage', 'Not applicable (review/context study)', sum(review), ''])
+    rows.append(['coverage', 'Could not be assigned to the six controlled settings',
+                 sum(not ss and not rv for ss, rv in zip(sets, review)), ''])
+    return rows, n
 
-unmapped = [{'corpus_id': r['corpus_id'], 'citation_key': r['citation_key'],
-             'evidence_setting': r['evidence_setting']}
-            for r, ss in zip(records, setting_sets) if not set(SETTINGS) & ss]
-(out / 'source_provenance.json').write_text(json.dumps({
-    'source_url': SOURCE_URL,
-    'retrieved_date_utc': '2026-09-11',
-    'source_sha256': hashlib.sha256(source.read_bytes()).hexdigest(),
-    'retained_record_count': len(records),
-    'counting_rule': 'Split existing semicolon-delimited labels; count each corpus_id once per combination. No recoding.',
-    'unmapped_evidence_records': unmapped,
-}, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 
-row_labels = [
-    'Traffic smoothing /\nmobile-actuator control',
-    'Speed harmonization / dynamic headway /\nbottleneck-inflow regulation',
-    'Lane assignment /\nlane-use control',
-    'Cooperative merging / coordinated gap\ncreation / ramp coordination',
-    'Integrated longitudinal–lateral\nbottleneck control',
-    'Platooning',
-    'Routing / dynamic traffic assignment /\nmanaged-lane operation',
-    'Perimeter/corridor control /\nfleet rebalancing',
-]
-column_labels = ['Analytical/\ntheoretical', 'Simulation', 'Test-track\nexperiment',
-                 'Field\nexperiment', 'Observational/\nopen-road data', 'Network/\ndemand model']
-plt.rcParams.update({'font.family': 'DejaVu Sans', 'font.size': 12, 'svg.fonttype': 'none'})
-fig = plt.figure(figsize=(13.5, 8.4), facecolor='white')
-ax = fig.add_axes([0.38, 0.22, 0.54, 0.61])
-im = ax.imshow(matrix, cmap='Blues', vmin=0, vmax=36, aspect='auto', interpolation='nearest')
-ax.set_xticks(range(6), labels=column_labels, fontsize=11)
-ax.set_yticks(range(8), labels=row_labels, fontsize=11.5)
-ax.xaxis.tick_top()
-ax.tick_params(axis='both', length=0, pad=10)
-for spine in ax.spines.values():
-    spine.set_visible(False)
-ax.set_xticks(np.arange(-0.5, 6, 1), minor=True)
-ax.set_yticks(np.arange(-0.5, 8, 1), minor=True)
-ax.grid(which='minor', color='white', linewidth=2)
-ax.tick_params(which='minor', bottom=False, left=False)
-for i in range(8):
-    for j in range(6):
-        n = matrix[i, j]
-        ax.text(j, i, str(n), ha='center', va='center', fontsize=14,
-                color='white' if n >= 20 else '#122532')
-cax = fig.add_axes([0.94, 0.22, 0.015, 0.61])
-bar = fig.colorbar(im, cax=cax, ticks=[0, 6, 12, 18, 24, 30, 36])
-bar.outline.set_visible(False)
-bar.ax.tick_params(length=0, labelsize=10)
-bar.set_label('Study count', labelpad=10, fontsize=11)
-fig.text(0.04, 0.96, 'Figure S1. Evidence settings across AV/CAV congestion-control application families',
-         fontsize=15, fontweight='bold', va='top')
-fig.text(0.04, 0.12,
-         'Cells report numbers of retained studies coded to each application–evidence-setting combination.\n'
-         'Application and evidence-setting fields are multi-label, so counts are non-exclusive and should not be\n'
-         'summed as independent study totals.', fontsize=11, linespacing=1.5, va='top')
-fig.savefig(out / 'Figure_S1.svg', facecolor='white')
-fig.savefig(out / 'Figure_S1.png', dpi=400, facecolor='white')
-plt.close(fig)
-(out / 'README.md').write_text(
-    '# Supplementary Figure S1\n\n' + CAPTION + '\n\n'
-    'Place Figure S1 in the supplementary material, with the figure and derived CSVs in the review repository. '
-    'It is not an additional main-text figure.\n\n'
-    'Source: ' + SOURCE_URL + '\n\n'
-    'The eight application labels and six evidence-setting labels are matched exactly after splitting '
-    'the existing fields on semicolons and trimming whitespace. Each study is counted once per cell. '
-    'Eighty of 96 records have at least one listed application. Five records have no label matching '
-    'the six controlled evidence settings; their original values are recorded in source_provenance.json. '
-    'A zero is a zero coded combination, not a statement that no evidence exists outside this corpus. '
-    'No facility bins, role changes, or quality/maturity scores are introduced.\n\n'
-    'Figure_S1_matrix.csv contains the plotted counts. Figure_S1_cell_membership.csv lists contributing '
-    'corpus IDs for each cell. corpus_profile_counts.csv contains the marginal counts used in Section 2. '
-    'source_provenance.json identifies the downloaded source by SHA-256.\n\n'
-    'Reproduce with Python, numpy, and matplotlib: `python build_figure_s1.py /path/to/retained_corpus.csv`.\n',
-    encoding='utf-8')
-print(json.dumps({'records': len(records), 'matrix': matrix.tolist(), 'output_directory': str(out)}))
+def main():
+    audit, corpus = read(AUDIT), read(CORPUS)
+    matrix, totals, unassigned, members, study_settings, cid = count(audit, corpus)
+    fig = draw(matrix, totals)
+    os.makedirs(OUT_DIR, exist_ok=True)
+    out = lambda name: os.path.join(OUT_DIR, name)
+    fig.savefig(out(STEM + '.svg'))
+    fig.savefig(out(STEM + '.pdf'))
+    fig.savefig(out(STEM + '.png'), dpi=600)
+
+    write_csv(out('Figure_S1_matrix.csv'), ['application_family', 'studies_in_family'] + SETTINGS,
+              [[f, n] + row for f, n, row in zip(FAMILIES, totals, matrix)])
+    cells = []
+    for f in FAMILIES:
+        for s in SETTINGS:
+            ids = sorted(sid for sid in members[f] if s in study_settings[sid])
+            cells.append([f, s, len(ids), '; '.join(ids), '; '.join(cid[i] for i in ids)])
+    write_csv(out('Figure_S1_cell_membership.csv'),
+              ['application_family', 'evidence_setting', 'study_count', 'audit_study_ids', 'corpus_ids'], cells)
+    prof, n = profile(corpus)
+    write_csv(out('corpus_profile_counts.csv'), ['dimension', 'category', 'study_count', f'percent_of_{n}'], prof)
+
+    sha = lambda p: hashlib.sha256(open(p, 'rb').read()).hexdigest()
+    json.dump({
+        'audit_source': os.path.basename(AUDIT), 'audit_sha256': sha(AUDIT),
+        'corpus_source': os.path.basename(CORPUS), 'corpus_sha256': sha(CORPUS),
+        'retained_record_count': n,
+        'audit_studies_with_any_relationship': len({s for v in members.values() for s in v}),
+        'counting_rule': ('Rows: a study counts once per family with any DIRECT or INDIRECT audit relationship. '
+                          'Columns: study-level evidence_setting from the retained corpus, split on semicolons and '
+                          'matched exactly to the six controlled settings. No recoding.'),
+        'audit_studies_without_controlled_setting': unassigned,
+    }, open(out('source_provenance.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
+
+    print('rows (family, n, counts):')
+    for fam, k, row in zip(FAMILIES, totals, matrix):
+        print(f'  {fam[:45]:45} n={k:2}  {row}')
+    print('audit studies with no assigned setting:', unassigned or 'none')
+
+
+if __name__ == '__main__':
+    main()

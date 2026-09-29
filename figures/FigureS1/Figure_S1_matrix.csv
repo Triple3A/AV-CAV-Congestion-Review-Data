@@ -1,9 +1,9 @@
-operational_application,Analytical/theoretical,Simulation,Test-track experiment,Field experiment,Observational/open-road data,Network/demand model
-Traffic smoothing / mobile-actuator control,13,18,2,3,0,0
-Speed harmonization / dynamic headway / bottleneck-inflow regulation,20,36,0,1,0,0
-Lane assignment / lane-use control,2,4,0,0,0,0
-Cooperative merging / coordinated gap creation / ramp coordination,9,16,0,0,0,0
-Integrated longitudinal–lateral bottleneck control,10,18,0,0,0,0
-Platooning,2,3,0,0,0,0
-Routing / dynamic traffic assignment / managed-lane operation,5,8,0,0,0,7
-Perimeter/corridor control / fleet rebalancing,1,1,0,0,0,1
+application_family,studies_in_family,Simulation,Analytical/theoretical,Network/demand model,Field experiment,Test-track experiment,Observational/open-road data
+Traffic smoothing / mobile actuator,9,9,8,0,1,0,0
+Speed harmonization / dynamic headway / bottleneck-inflow regulation,26,25,13,0,0,0,0
+Lane assignment / lane-use control,8,7,4,0,0,0,0
+Cooperative merging / coordinated gap creation / ramp coordination,15,14,8,0,0,0,0
+Integrated longitudinal–lateral bottleneck control,11,11,8,0,0,0,0
+Platooning,9,7,5,0,1,1,0
+Routing / dynamic traffic assignment / managed-lane operation,7,4,2,4,0,0,0
+Perimeter / corridor / fleet rebalancing,2,2,2,1,0,0,0
