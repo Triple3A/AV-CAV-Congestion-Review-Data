@@ -1,6 +1,6 @@
 # Codebook
 
-This version documents the 97-publication retained corpus after the TRID update, Comments 5-6, and the targeted Wu et al. (2026) review addition in Comments 7-10. The screening matrix contains 222 verified records from 260 candidates; 125 verified records are excluded.
+This version documents the 97-publication retained corpus after the TRID update, Comments 5-6, and the targeted Wu et al. (2026) review addition in Comments 7-10, and the final second-author coding check and adjudication (September 2026). The screening matrix contains 222 verified records from 260 candidates; 125 verified records are excluded.
 
 ## General conventions
 
@@ -30,7 +30,7 @@ The taxonomy has exactly nine dimensions. Operating context has two subfields; t
 
 ### Congestion mechanism
 
-Traffic-flow process or system-level congestion consequence that the study seeks to explain or influence. Categories include congestion onset/breakdown, capacity drop, queue formation/discharge, stop-and-go waves, string instability, lane-changing friction, merging turbulence, physical spillback, and shifted/redistributed congestion. Physical spillback and redistribution remain separate.
+Traffic-flow process or system-level congestion consequence that the study seeks to explain or influence. Categories include congestion onset/breakdown, capacity drop, queue formation/discharge, stop-and-go waves, string instability, lane-changing friction, merging turbulence, physical spillback, and shifted/redistributed congestion. Physical spillback and redistribution remain separate. The coded data also use four further labels where a study supports them: bottleneck activation/throughput loss, shockwave propagation, network congestion distribution, and induced demand/VMT. Figure 2 and Table S4 use the nine mechanisms listed first.
 
 ### AV/CAV decision lever
 
@@ -57,7 +57,7 @@ Physical facility/geometry and spatial or system scale at which the strategy and
 - `facility_context`: physical or geometric traffic environment in which the control or mechanism is evaluated. Categories include ring-road/single-lane testbed, basic freeway or motorway segment, on-ramp merge, lane drop, weaving section, work zone/lane closure, sag curve, other explicitly defined geometry, and not facility-specific. Corridor and network are not facility types. Urban intersections, diverge/off-ramp bottlenecks, tunnel bottlenecks, and moving bottlenecks are retained when supported by the study context.
 - `spatial_system_scale`: level at which the traffic effect or control outcome is evaluated. Categories are vehicle string/platoon, local road segment, bottleneck/local facility, corridor, and network/system. Mere mention of routes, downstream traffic or a simulation network does not establish network-scale evaluation. Reviews and books without an original evaluation receive `Not applicable` for this subfield.
 
-The split was made record by record using existing coded study context and available original sources. Ambiguous subfields are `Not clearly specified` and appear in `author_verification_queue.csv`. `legacy_facility_system_scale` preserves the previous composite value for traceability only; it is not an active taxonomy field. The legacy value is never used to normalize facility-based counts.
+The split was made record by record using existing coded study context and available original sources. Ambiguous subfields are coded `Not clearly specified`. `legacy_facility_system_scale` preserves the previous composite value for traceability only; it is not an active taxonomy field. The legacy value is never used to normalize facility-based counts.
 
 ### Mixed-traffic and deployment conditions
 
@@ -85,17 +85,16 @@ Key finding, main limitation, and comparator/reference condition were recorded a
 
 Extract the actual reference condition from the original study material. Record multiple substantive comparators separated by semicolons, and distinguish intervention baselines from references used to calculate a metric or validate a model. Do not infer an all-HDV or uncontrolled baseline merely from an improvement percentage. Use `Not applicable` when no comparator applies to the retained synthesis role, and `Not clearly reported` when a relevant comparator cannot be established confidently from available original material, including inaccessible or insufficient full text. This latter code is not a claim that the original publication itself omitted a comparator.
 
-`retained_corpus.csv` is authoritative across all 97 retained publications, including the original 96. S5 copies the comparator and both context subfields by stable `corpus_id`; it never independently recodes them. The screening matrix has no comparator extraction column.
+`Table_S2_Retained_Corpus.csv` is authoritative for the comparator field across all 97 retained publications. The screening matrix has no comparator extraction column.
 
-Source access, evidence basis and verification tasks are recorded in `comparator_context_source_audit.csv`. The original 96 contain 71 source-supported explicit comparators, 17 `Not applicable`, and 8 `Not clearly reported`. Adding Wu increases only `Not applicable`, producing final counts of 71, 18, and 8. Only the eight `Not clearly reported` records require author verification of the comparator; the audit does not invent a baseline for them.
+Final comparator counts are 71 source-supported explicit comparators, 18 `Not applicable`, and 8 `Not clearly reported`. Only the eight `Not clearly reported` records require author verification of the comparator; no baseline is invented for them.
 
 ## Dataset-specific notes
 
-- `retained_corpus.csv`: 97 records; exactly nine taxonomy dimensions plus descriptive and audit fields.
-- `verified_screening_matrix.csv`: 222 verified records; the new review's [C] disposition is recorded in its audit note. No comparator field is added.
-- `study_application_mechanism_audit.csv` (Table S5): 71 operational-study records. `corpus_id` links to the master; comparator and context values are exact copies. Previous `facility_tags` values are retained only as `legacy_facility_tags`.
-- `application_mechanism_evidence_map.csv` (Table S4): marker assignments and supporting-study membership remain unchanged. The two context subfields aggregate linked S5/master values; `legacy_typical_facilities` preserves old broad tags for audit only.
-- `manuscript_reference_match_audit.csv`: matches all 96 supplied bibliography entries and documents the proposed Wu insertion as the 97th retained reference. The supplied DOCX is not represented as already edited.
-- `comparator_context_source_audit.csv`: one row per retained publication with evidence basis, access level and verification flags.
-- `author_verification_queue.csv`: eight unresolved comparators and eight ambiguous operating-context splits; because one record appears in both groups, the queue contains 15 distinct publications.
-- Figure S1: keep the finalized application-by-evidence-setting heatmap. Counts are regenerated from the revised master; review/no-setting records are reported separately. No maturity scores are used.
+- `Table_S1_Verified_Screening_Matrix.csv`: 222 verified records with record-level screening dispositions. No comparator field.
+- `Table_S2_Retained_Corpus.csv`: 97 records, with review roles (62 [D], 25 [M], 10 [C]), exactly nine taxonomy dimensions, and descriptive and audit fields. Records changed by the final adjudication say so in `audit_note`.
+- `Table_S3_Screening_Flow.csv`: the counts shown in Figure 1 (260 candidates, 222 verified, 97 retained).
+- `Table_S5_Study_Application_Mechanism_Audit.csv`: the study-level application–mechanism audit of 71 retained studies. It has one row per study × application family × congestion mechanism, coded DIRECT, INDIRECT or NONE. A finding pattern (`consistent_positive`, `mixed`, `negative`, `strongly_conditional`) is recorded for direct relationships only, together with the supporting metric, evidence setting, full-text rationale and source location. Rows changed at adjudication are marked in `full_text_rationale`.
+- `Table_S4_Application_Mechanism_Evidence_Map.csv`: the mechanical aggregation of Table S5 into the 8 × 9 map. Marker rules are in `docs/evidence_map_method.md`.
+- `Table_S6_Independent_Coding_Agreement.csv`, `Table_S6_sensitivity_excluded_comparisons.csv` `independent_coding_check_adjudication.csv` and `evidence_role_reconciliation.csv`: the second-author coding check of 19 studies, the Panel B sensitivity analysis, the record-level adjudication of all non-identical codings, and the full-text check of the evidence-role reassessments.
+- Figure S1: application families from Table S5 against study-level evidence settings from Table S2, as unique-study counts. No maturity scores are used.

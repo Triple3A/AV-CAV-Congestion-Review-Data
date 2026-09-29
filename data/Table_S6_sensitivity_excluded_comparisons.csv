@@ -1,0 +1,13 @@
+study_id,citation,dimension,lead_author_code,Ashkan_code,non_codebook_lead_labels
+M009,Chakraborty et al. (2021),Congestion mechanism,Queue formation / discharge; Shifted / redistributed congestion; physical spillback represented only indirectly,Shifted / redistributed congestion; Network congestion distribution,physical spillback represented only indirectly
+M022,Gu et al. (2022),Congestion mechanism,Capacity drop; Stop-and-go waves; Network congestion distribution; NFD bifurcation; Turning/merging-induced network instability,Merging turbulence; Shifted / redistributed congestion; Network congestion distribution,NFD bifurcation; Turning/merging-induced network instability
+M082,Xiao et al. (2018),Congestion mechanism,Bottleneck activation / throughput loss; Capacity drop; Merging turbulence; flow heterogeneity,Capacity drop; Queue formation / discharge; Merging turbulence,flow heterogeneity
+M083,Xiao et al. (2020),Congestion mechanism,Bottleneck activation / throughput loss; Lane-changing friction; dedicated-lane underutilization,Queue formation / discharge; Shifted / redistributed congestion; Network congestion distribution,dedicated-lane underutilization
+M084,Yan et al. (2025),Congestion mechanism,Bottleneck activation / throughput loss; Capacity drop; Lane-changing friction; Queueing/delay,Capacity drop; Lane-changing friction; Merging turbulence,Queueing/delay
+M082,Xiao et al. (2018),AV/CAV decision lever,Not clearly specified,Acceleration/deceleration; Desired time headway/spacing gap,Not clearly specified
+M083,Xiao et al. (2020),AV/CAV decision lever,Not clearly specified,Desired time headway/spacing gap; Lane choice; Entry/access/release decision,Not clearly specified
+M017,Du et al. (2023),Coordination/implementation mode,Individual/onboard or not clearly specified,Infrastructure-assisted V2I/I2V; Centralized,Individual/onboard or not clearly specified
+M058,Ramezani and Ye (2019),Coordination/implementation mode,Individual/onboard or not clearly specified,Centralized,Individual/onboard or not clearly specified
+M063,Rossi et al. (2018),Coordination/implementation mode,Individual/onboard or not clearly specified,Centralized,Individual/onboard or not clearly specified
+M064,Shang and Stern (2021),Coordination/implementation mode,Individual/onboard or not clearly specified,Individual/onboard,Individual/onboard or not clearly specified
+M084,Yan et al. (2025),Coordination/implementation mode,Individual/onboard or not clearly specified,Individual/onboard; Infrastructure-assisted V2I/I2V; Centralized; Hybrid vehicle–infrastructure,Individual/onboard or not clearly specified

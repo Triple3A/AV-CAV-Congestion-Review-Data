@@ -2,4 +2,4 @@
 "Candidate discovery, TRID validation, and closest-comparator review",260,0,260,"260 unique candidate records were identified through AI-assisted discovery, citation tracing, TRID validation, and the closest-comparator review check."
 Manual bibliographic verification and deduplication,260,38,222,"38 duplicate, substantially overlapping, or unverifiable records were removed; 222 verified records remained."
 Manual eligibility assessment,222,125,97,"125 verified records were excluded as outside the review scope or insufficiently relevant; 97 publications remained."
-Final retained manuscript corpus,97,0,97,97 publications are retained in the final manuscript and represented in retained_corpus.csv.
+Final retained manuscript corpus,97,0,97,97 publications are retained in the final manuscript and listed in Table_S2_Retained_Corpus.csv.

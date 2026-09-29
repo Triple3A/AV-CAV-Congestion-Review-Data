@@ -7,7 +7,7 @@ Columns : the six controlled evidence settings, taken from each study's `evidenc
 Families and settings are both non-exclusive, so rows and columns do not sum to the corpus or audit totals.
 
 Usage:
-    python build_figure_s1.py data/study_application_mechanism_audit.csv data/retained_corpus.csv [output_dir]
+    python build_figure_s1.py data/Table_S5_Study_Application_Mechanism_Audit.csv data/Table_S2_Retained_Corpus.csv [output_dir]
 
 Outputs: Figure_S1.png (600 dpi), Figure_S1.svg, Figure_S1.pdf, Figure_S1_matrix.csv,
          Figure_S1_cell_membership.csv, corpus_profile_counts.csv, source_provenance.json
@@ -27,8 +27,8 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 from matplotlib.patches import Rectangle
 
-AUDIT = sys.argv[1] if len(sys.argv) > 1 else 'data/study_application_mechanism_audit.csv'
-CORPUS = sys.argv[2] if len(sys.argv) > 2 else 'data/retained_corpus.csv'
+AUDIT = sys.argv[1] if len(sys.argv) > 1 else 'data/Table_S5_Study_Application_Mechanism_Audit.csv'
+CORPUS = sys.argv[2] if len(sys.argv) > 2 else 'data/Table_S2_Retained_Corpus.csv'
 OUT_DIR = sys.argv[3] if len(sys.argv) > 3 else os.path.dirname(os.path.abspath(__file__))
 STEM = 'Figure_S1'
 

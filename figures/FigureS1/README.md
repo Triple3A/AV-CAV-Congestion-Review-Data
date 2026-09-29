@@ -3,8 +3,8 @@
 Figure S1. Evidence settings across AV/CAV congestion-control application families. Rows are the eight application families of the application–mechanism audit (Table S5); a study is counted once in a family when it has at least one direct or indirect relationship coded to that family. Columns are the six controlled evidence settings from the study-level coding in the retained corpus (Table S2). Each cell reports unique studies. Families and evidence settings are both non-exclusive, so cells, rows and columns should not be summed to the corpus or audit totals. The right-hand column gives the number of audited studies in each family.
 
 Sources (repository `data/` folder):
-- `study_application_mechanism_audit.csv` (Table S5, final adjudicated audit)
-- `retained_corpus.csv` (Table S2, final adjudicated corpus)
+- `Table_S5_Study_Application_Mechanism_Audit.csv` (final adjudicated audit)
+- `Table_S2_Retained_Corpus.csv` (final adjudicated corpus)
 
 This version replaces the earlier heatmap, which counted corpus-level operational-application codes rather than the audit families used in the manuscript text and Figure 2.
 
@@ -20,5 +20,5 @@ Files:
 Reproduce with Python and matplotlib (Liberation Sans font):
 
 ```
-python figures/FigureS1/build_figure_s1.py data/study_application_mechanism_audit.csv data/retained_corpus.csv
+python figures/FigureS1/build_figure_s1.py data/Table_S5_Study_Application_Mechanism_Audit.csv data/Table_S2_Retained_Corpus.csv
 ```

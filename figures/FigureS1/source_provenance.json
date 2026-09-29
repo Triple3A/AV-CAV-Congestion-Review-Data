@@ -1,0 +1,12 @@
+{
+  "audit_source": "Table_S5_Study_Application_Mechanism_Audit.csv",
+  "audit_sha256": "d3b8b01d0554321e5730a5a8ecc111b116c704d6d60d3c9e41da9a8b8d57c860",
+  "corpus_source": "Table_S2_Retained_Corpus.csv",
+  "corpus_sha256": "cac92dbf16358db188bfb0e8c219d33d346ff1974379d3cca068323b6a628625",
+  "retained_record_count": 97,
+  "audit_studies_with_any_relationship": 70,
+  "counting_rule": "Rows: a study counts once per family with any DIRECT or INDIRECT audit relationship. Columns: study-level evidence_setting from the retained corpus, split on semicolons and matched exactly to the six controlled settings. No recoding.",
+  "audit_studies_without_controlled_setting": [
+    "S009 (Daganzo 2002)"
+  ]
+}

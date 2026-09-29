@@ -26,18 +26,21 @@ Requires `direct_supporting_study_count = 0` and `indirect_supporting_study_coun
 
 Marker categories describe the pattern of support in the retained coded set, not methodological quality, field validation, causal certainty across settings, deployment readiness, or treatment-effect magnitude. Several consistent simulation studies may therefore yield ● while the evidence setting remains simulation. A dash indicates only that no substantive relationship was identified in the retained corpus.
 
-## Supporting information
+## Source data and aggregation
 
-The detailed basis for each cell is recorded in `data/application_mechanism_evidence_map.csv`, including:
+The map is aggregated mechanically from the study-level audit in `data/Table_S5_Study_Application_Mechanism_Audit.csv`. That file has one row per study × application family × congestion mechanism, coded DIRECT, INDIRECT or NONE. A finding pattern is recorded for direct relationships only. No study-level field is reinterpreted during aggregation.
 
-- supporting-study count;
-- supporting study IDs;
-- direct versus indirect relationship;
-- evidence settings;
-- typical facilities;
-- common design methods;
-- a short rationale.
+The cell-level result is `data/Table_S4_Application_Mechanism_Evidence_Map.csv`. For each of the 72 cells it records:
 
-Study count is descriptive and is not interpreted as an effect-size estimate or evidence-quality score.
+- the final marker and its meaning;
+- the direct and indirect supporting-study counts, IDs and citations;
+- counts of direct findings by pattern (consistently positive, mixed, negative, strongly conditional);
+- the evidence roles and evidence settings of the supporting studies;
+- representative supporting metrics;
+- a short cell rationale.
 
-The map should therefore be read together with the study context, evidence setting, congestion metric, and limitations reported elsewhere in the review.
+The final map contains 108 direct and 60 indirect study–cell links, giving 5 ●, 35 ○, 5 □ and 27 — cells.
+
+Study count is descriptive. It is not interpreted as an effect-size estimate or an evidence-quality score.
+
+The map should therefore be read together with the study context, evidence setting, congestion metric and limitations reported elsewhere in the review.

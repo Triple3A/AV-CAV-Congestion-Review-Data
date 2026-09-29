@@ -9,8 +9,8 @@ authors:
     given-names: "Ashkan"
   - family-names: "Zhang"
     given-names: "Michael H."
-version: 1.0.0
-date-released: 2026-08-19
+version: 1.1.0
+date-released: 2026-09-29
 license: CC-BY-4.0
 keywords:
   - autonomous vehicles

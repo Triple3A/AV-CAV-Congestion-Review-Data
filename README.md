@@ -8,79 +8,86 @@ This repository contains the study-level coding and supporting synthesis files f
 
 ## Overview
 
-The review examines how autonomous and connected autonomous vehicles may act as traffic-control agents for congestion mitigation, with a primary focus on freeway bottlenecks and mixed traffic.
+The review examines how autonomous and connected automated vehicles may act as traffic-control agents for congestion mitigation. Its main focus is freeway bottlenecks and mixed traffic.
 
-The literature review was conducted using a semi-systematic process that combined AI-assisted literature discovery with manual bibliographic verification, eligibility screening, coding, and narrative synthesis. Undermind AI and Perplexity were used only to identify candidate publications. Final inclusion decisions, coding, interpretation, and synthesis were performed manually.
+The literature review followed a semi-systematic process. AI-assisted literature discovery was combined with manual bibliographic verification, eligibility screening, coding and narrative synthesis. Undermind AI and Perplexity were used only to identify candidate publications.
 
-The current manuscript-linked corpus contains **91 retained publications**. These were selected from **216 unique and verifiable records**, which in turn were obtained from **254 candidate records** after bibliographic verification and deduplication.
+The manuscript-linked corpus contains **97 retained publications**, selected in three steps:
+
+- **260 candidate records** were identified.
+- **222 verified records** remained after bibliographic verification and deduplication.
+- **97 publications** were retained after eligibility assessment.
 
 ## Files
 
-### `data/retained_corpus.csv`
-The final 91-publication manuscript corpus. It contains the harmonized coding used in the review, including congestion mechanism, AV/CAV decision lever, design method, coordination/implementation mode, operational application, facility or system scale, mixed-traffic condition, evidence setting, congestion metric, key finding, and main limitation.
+The file names match the supplementary tables cited in the manuscript's Data Availability Statement.
 
-### `data/verified_screening_matrix.csv`
-The 216 unique and verifiable records that remained after bibliographic verification and deduplication.
-
-### `data/screening_flow.csv`
-The record counts used to document the literature-selection process.
-
-### `data/application_mechanism_evidence_map.csv`
-Cell-level support for the application–mechanism synthesis map, including supporting-study counts, study identifiers, evidence settings, facility tags, common design methods, and a short rationale for each cell.
-
-### `data/application_mechanism_figure_matrix.csv`
-A compact application × mechanism matrix used to construct the synthesis figure.
-
-### `data/study_application_mechanism_audit.csv`
-Study-level audit used to support the application–mechanism map.
-
-### `data/manuscript_reference_match_audit.csv`
-Reference-level audit showing how the papers cited in the manuscript were matched to the screening matrix or separately verified.
-
-### `figures/FigureS1/Figure_S1_matrix.csv` 
-Contains the plotted counts. 
-
-### `figures/FigureS1/Figure_S1_cell_membership.csv` 
-Lists contributing corpus IDs for each cell. 
-
-### `figures/FigureS1/corpus_profile_counts.csv` 
-Contains the marginal counts used in Section 2.
-
-Reproduce with Python, numpy, and matplotlib: `python build_figure_s1.py /path/to/retained_corpus.csv`.
+| File | Content |
+|---|---|
+| `data/Table_S1_Verified_Screening_Matrix.csv` | The 222 verified records and their record-level screening disposition. |
+| `data/Table_S2_Retained_Corpus.csv` | The final retained corpus of 97 publications, with review roles (62 [D], 25 [M], 10 [C]), the nine taxonomy dimensions, and descriptive fields (key finding, main limitation, comparator/reference condition). |
+| `data/Table_S3_Screening_Flow.csv` | The record counts shown in Figure 1. |
+| `data/Table_S4_Application_Mechanism_Evidence_Map.csv` | One row per cell of the 8 × 9 application-family × congestion-mechanism map (Figure 2). Each row gives the final marker, the direct and indirect supporting studies, finding-pattern counts, evidence settings, representative metrics and a cell rationale. |
+| `data/Table_S5_Study_Application_Mechanism_Audit.csv` | The study-level application–mechanism audit of 71 retained studies. It has one row per study × family × mechanism relationship. Each row gives the directness (DIRECT, INDIRECT or NONE), a finding pattern for direct relationships, the supporting metric, the evidence setting, a full-text rationale and the source location. |
+| `data/Table_S6_Independent_Coding_Agreement.csv` | Agreement between the lead author's coding and a second author's independent coding of a 19-study subset, by dimension, with an adjudication summary. The rows prefixed "Panel B –" hold the sensitivity analysis described below. |
+| `data/Table_S6_sensitivity_excluded_comparisons.csv` | The 12 comparisons set aside in the Panel B sensitivity analysis. |
+| `data/evidence_role_reconciliation.csv` | The full-text check of the 11 audit reassessments from [D] to [M]: 10 were confirmed and one was restored to [D]. |
+| `data/independent_coding_check_adjudication.csv` | One row per non-identical coding (105 rows). Each row gives both coders' codes, the adjudicated code, the rationale, the full-text source, and which records changed. |
+| `figures/FigureS1/` | Supplementary Figure S1 with its source script and derived counts. See the README in that folder. |
+| `docs/evidence_map_method.md` | The marker rules for Table S4 and Figure 2. |
+| `CODEBOOK.md` | Coding definitions and conventions. |
 
 ## Coding structure
 
 The review separates several concepts that are often grouped together in AV/CAV studies:
 
 - **Congestion mechanism:** the traffic-flow process or system consequence being targeted.
-- **Decision lever:** the executable AV/CAV action, such as acceleration, desired speed, headway, lane choice, merge/yield, route choice, or access decision.
-- **Design method:** the method used to compute or learn the control action, such as rule-based control, optimal control, MPC, game-theoretic control, or RL/MARL.
-- **Coordination/implementation mode:** how information and control authority are organized, such as onboard, cooperative V2V, infrastructure-assisted, centralized, or distributed control.
+- **Decision lever:** the executable AV/CAV action, such as acceleration, desired speed, headway, lane choice, merge/yield, route choice or access decision.
+- **Design method:** the method used to compute or learn the control action, such as rule-based control, optimal control, MPC, game-theoretic control or RL/MARL.
+- **Coordination/implementation mode:** how information and control authority are organized, such as onboard, cooperative V2V, infrastructure-assisted, centralized or distributed control.
 - **Operational application:** the traffic-management function being implemented.
-- **Facility/system scale:** the physical or network setting.
-- **Mixed-traffic condition:** assumptions about penetration, controllability, human behavior, communication, and related factors.
-- **Evidence setting:** analytical/theoretical, simulation, test-track, field experiment, observational/open-road data, or network/demand model.
+- **Operating context:** facility context and spatial/system scale.
+- **Mixed-traffic and deployment conditions:** assumptions about penetration, controllability, human behavior, communication and related factors.
+- **Evidence setting:** analytical/theoretical, simulation, test-track, field experiment, observational/open-road data or network/demand model.
 - **Congestion metric:** the outcome used to evaluate the congestion claim.
 
-`key_finding` and `main_limitation` are descriptive synthesis fields rather than additional taxonomy dimensions.
+`key_finding`, `main_limitation` and `comparator_reference_condition` are descriptive extraction fields, not taxonomy dimensions.
 
-Baseline/comparator is not coded as a corpus-wide taxonomy field. It is used only where needed for study-specific comparison in the synthesis.
+## Application–mechanism map (Table S4, Figure 2)
 
-## Application–mechanism map
+The map is aggregated mechanically from the study-level audit in Table S5:
 
-The synthesis map uses the following markers:
+- **●** at least two direct supporting studies, all with consistently positive findings;
+- **○** one direct supporting study, or at least one direct finding that is mixed, negative or strongly conditional;
+- **□** indirect support only;
+- **—** no substantive relationship identified in the coded set.
 
-- **●** direct relationship with repeated support in the retained literature
-- **○** direct relationship with limited, mixed, or strongly conditional support
-- **□** indirect or mediated relationship
-- **—** no substantive relationship identified in the coded support set
+The final map contains 108 direct and 60 indirect study–cell links. It has 5 ●, 35 ○, 5 □ and 27 — cells.
 
-The marker assignment is a structured qualitative synthesis rather than a meta-analysis or numerical ranking. More detail is provided in [`docs/evidence_map_method.md`](docs/evidence_map_method.md).
+Markers describe the pattern of support, not study quality or deployment readiness. See [`docs/evidence_map_method.md`](docs/evidence_map_method.md).
 
-## Figure S1 - Evidence settings across AV/CAV congestion-control application families
-Cells report numbers of retained studies coded to each application–evidence-setting combination. Application and evidence-setting fields are multi-label, so counts are non-exclusive and should not be summed as independent study totals.
+## Independent coding check (Table S6)
 
-The eight application labels and six evidence-setting labels are matched exactly after splitting the existing fields on semicolons and trimming whitespace. Each study is counted once per cell. Eighty of 96 records have at least one listed application. Five records have no label matching the six controlled evidence settings; their original values are recorded in source_provenance.json. A zero is a zero coded combination, not a statement that no evidence exists outside this corpus. No facility bins, role changes, or quality/maturity scores are introduced.
+A second author independently coded a stratified subset of 19 retained studies. Agreement is percentage agreement, computed separately for each dimension:
+
+- **Single-label fields** agree when the two values are identical.
+- **Multi-label fields** agree when the two label sets are identical, or when one coder's labels are wholly contained in the other's.
+
+Agreement ranged from 47.4% to 100%.
+
+Panel B is a sensitivity analysis. It sets aside 12 comparisons in which the lead coding still carried labels from before the final codebook, and there the lower bound is 57.9%.
+
+All non-identical codings were adjudicated against the full texts and the coding definitions. The adjudicated codes are the ones in Tables S2, S4 and S5.
+
+## Figure S1
+
+Figure S1 cross-tabulates the audit's application families (Table S5) against the study-level evidence settings (Table S2). Counts are unique studies per cell. Families and settings are both non-exclusive, so the counts do not sum to the corpus total.
+
+Rebuild it with:
+
+```
+python figures/FigureS1/build_figure_s1.py data/Table_S5_Study_Application_Mechanism_Audit.csv data/Table_S2_Retained_Corpus.csv
+```
 
 ## Notes on source availability
 
@@ -90,7 +97,7 @@ Three retained references were not available in full text during the final corpu
 - Richards (1956)
 - Treiber and Kesting (2012)
 
-These entries are clearly flagged in `retained_corpus.csv`. No detailed study coding was inferred where the source could not be checked directly.
+These entries are flagged in `Table_S2_Retained_Corpus.csv`. No detailed study coding was inferred where the source could not be checked directly.
 
 Copyrighted article PDFs are not included in this repository.
 
@@ -100,4 +107,4 @@ Please cite the accompanying review and this repository when using the coding or
 
 ## License
 
-The author-created coding, synthesis files, and documentation are released under the license stated in `LICENSE.md`. Third-party publications and bibliographic content remain subject to their original terms.
+The author-created coding, synthesis files and documentation are released under the license stated in `LICENSE.md`. Third-party publications and bibliographic content remain subject to their original terms.
