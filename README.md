@@ -25,14 +25,14 @@ The file names match the supplementary tables cited in the manuscript's Data Ava
 | File | Content |
 |---|---|
 | `data/Table_S1_Verified_Screening_Matrix.csv` | The 222 verified records and their record-level screening disposition. |
-| `data/Table_S2_Retained_Corpus.csv` | The final retained corpus of 97 publications, with review roles (62 [D], 25 [M], 10 [C]), the nine taxonomy dimensions, and descriptive fields (key finding, main limitation, comparator/reference condition). |
+| `data/Table_S2_Retained_Corpus.csv` | The final retained corpus of 97 publications, with review roles (61 [D], 26 [M], 10 [C]), the nine taxonomy dimensions, and descriptive fields (key finding, main limitation, comparator/reference condition). |
 | `data/Table_S3_Screening_Flow.csv` | The record counts shown in Figure 1. |
 | `data/Table_S4_Application_Mechanism_Evidence_Map.csv` | One row per cell of the 8 × 9 application-family × congestion-mechanism map (Figure 2). Each row gives the final marker, the direct and indirect supporting studies, finding-pattern counts, evidence settings, representative metrics and a cell rationale. |
 | `data/Table_S5_Study_Application_Mechanism_Audit.csv` | The study-level application–mechanism audit of 71 retained studies. It has one row per study × family × mechanism relationship. Each row gives the directness (DIRECT, INDIRECT or NONE), a finding pattern for direct relationships, the supporting metric, the evidence setting, a full-text rationale and the source location. |
-| `data/Table_S6_Independent_Coding_Agreement.csv` | Agreement between the lead author's coding and a second author's independent coding of a 19-study subset, by dimension, with an adjudication summary. The rows prefixed "Panel B –" hold the sensitivity analysis described below. |
-| `data/Table_S6_sensitivity_excluded_comparisons.csv` | The 12 comparisons set aside in the Panel B sensitivity analysis. |
-| `data/evidence_role_reconciliation.csv` | The full-text check of the 11 audit reassessments from [D] to [M]: 10 were confirmed and one was restored to [D]. |
-| `data/independent_coding_check_adjudication.csv` | One row per non-identical coding (105 rows). Each row gives both coders' codes, the adjudicated code, the rationale, the full-text source, and which records changed. |
+| `data/Table_S6_Independent_Coding_Agreement.csv` | Exact-set agreement between the lead author's coding and a second author's independent coding of a 19-study subset, by dimension, with mean Jaccard similarity as a secondary set-overlap diagnostic and an adjudication summary. |
+| `data/Table_S6_legacy_label_review.csv` | The 12 comparisons in which the frozen lead coding carried a label outside the final codebook, with how each was treated. None was excluded. |
+| `data/evidence_role_reconciliation.csv` | The re-check of the 11 audit reassessments from [D] to [M]: 10 were confirmed and one was restored to [D]. |
+| `data/independent_coding_check_adjudication.csv` | One row per disagreement (105 rows). Each row gives both coders' codes, the adjudicated code, the rationale, the full-text source, and which records changed. |
 | `figures/FigureS1/` | Supplementary Figure S1 with its source script and derived counts. See the README in that folder. |
 | `docs/evidence_map_method.md` | The marker rules for Table S4 and Figure 2. |
 | `CODEBOOK.md` | Coding definitions and conventions. |
@@ -71,13 +71,15 @@ Markers describe the pattern of support, not study quality or deployment readine
 A second author independently coded a stratified subset of 19 retained studies. Agreement is percentage agreement, computed separately for each dimension:
 
 - **Single-label fields** agree when the two values are identical.
-- **Multi-label fields** agree when the two label sets are identical, or when one coder's labels are wholly contained in the other's.
+- **Multi-label fields** agree only when the complete normalized label sets are identical (exact-set agreement). Nested, partially overlapping or disjoint sets count as disagreements.
 
-Agreement ranged from 47.4% to 100%.
+Normalization covers formatting only (whitespace, capitalization, delimiters, duplicates, order) and old wording that is equivalent to a final-codebook label. Agreement ranged from 10.5% (congestion mechanism) to 100% (evidence role).
 
-Panel B is a sensitivity analysis. It sets aside 12 comparisons in which the lead coding still carried labels from before the final codebook, and there the lower bound is 57.9%.
+Mean Jaccard similarity (|A ∩ B| / |A ∪ B|) is reported separately as a secondary set-overlap diagnostic. It is not combined with exact-set agreement.
 
-All non-identical codings were adjudicated against the full texts and the coding definitions. The adjudicated codes are the ones in Tables S2, S4 and S5.
+In 12 comparisons the frozen lead coding carried a label outside the final codebook. One ("Queueing/delay") is old wording of "Queue formation / discharge" and was normalized before comparison. The other 11 are substantive or unresolved labels; they were kept and counted. No comparison was excluded. See `data/Table_S6_legacy_label_review.csv`.
+
+All 105 disagreements were resolved through discussion and adjudication using the coding definitions. The adjudicated codes are the ones in Tables S2, S4 and S5.
 
 ## Figure S1
 
