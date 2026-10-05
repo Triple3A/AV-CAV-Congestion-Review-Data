@@ -1,14 +1,14 @@
 application_family,evidence_setting,study_count,audit_study_ids,corpus_ids
-Traffic smoothing / mobile actuator,Simulation,9,S008; S013; S016; S028; S036; S046; S054; S055; S056,M013; M020; M023; M037; M053; M064; M078; M079; M080
+Traffic smoothing / mobile actuator,Simulation,11,S008; S013; S016; S028; S036; S046; S054; S055; S056; S073; S077,M013; M020; M023; M037; M053; M064; M078; M079; M080; M098; M081
 Traffic smoothing / mobile actuator,Analytical/theoretical,8,S008; S013; S016; S028; S046; S054; S055; S056,M013; M020; M023; M037; M064; M078; M079; M080
 Traffic smoothing / mobile actuator,Network/demand model,0,,
-Traffic smoothing / mobile actuator,Field experiment,1,S016,M023
-Traffic smoothing / mobile actuator,Test-track experiment,0,,
+Traffic smoothing / mobile actuator,Field experiment,2,S016; S073,M023; M098
+Traffic smoothing / mobile actuator,Test-track experiment,1,S074,M067
 Traffic smoothing / mobile actuator,Observational/open-road data,0,,
-Speed harmonization / dynamic headway / bottleneck-inflow regulation,Simulation,25,S003; S007; S010; S011; S012; S014; S017; S018; S019; S020; S021; S024; S027; S029; S030; S032; S035; S036; S037; S043; S052; S053; S054; S066; S071,M004; M012; M017; M018; M019; M021; M024; M025; M026; M027; M028; M031; M036; M038; M042; M045; M051; M053; M054; M061; M074; M075; M078; M035; M096
-Speed harmonization / dynamic headway / bottleneck-inflow regulation,Analytical/theoretical,13,S003; S007; S011; S012; S018; S020; S021; S032; S035; S037; S043; S052; S054,M004; M012; M018; M019; M025; M027; M028; M045; M051; M054; M061; M074; M078
+Speed harmonization / dynamic headway / bottleneck-inflow regulation,Simulation,27,S003; S007; S010; S011; S012; S014; S017; S018; S019; S020; S021; S024; S027; S029; S030; S032; S035; S036; S037; S043; S052; S053; S054; S066; S071; S075; S076,M004; M012; M017; M018; M019; M021; M024; M025; M026; M027; M028; M031; M036; M038; M042; M045; M051; M053; M054; M061; M074; M075; M078; M035; M096; M076; M099
+Speed harmonization / dynamic headway / bottleneck-inflow regulation,Analytical/theoretical,14,S003; S007; S011; S012; S018; S020; S021; S032; S035; S037; S043; S052; S054; S075,M004; M012; M018; M019; M025; M027; M028; M045; M051; M054; M061; M074; M078; M076
 Speed harmonization / dynamic headway / bottleneck-inflow regulation,Network/demand model,0,,
-Speed harmonization / dynamic headway / bottleneck-inflow regulation,Field experiment,0,,
+Speed harmonization / dynamic headway / bottleneck-inflow regulation,Field experiment,1,S076,M099
 Speed harmonization / dynamic headway / bottleneck-inflow regulation,Test-track experiment,0,,
 Speed harmonization / dynamic headway / bottleneck-inflow regulation,Observational/open-road data,0,,
 Lane assignment / lane-use control,Simulation,7,S032; S041; S048; S061; S063; S068; S070,M045; M058; M068; M086; M089; M093; M095
@@ -23,7 +23,7 @@ Cooperative merging / coordinated gap creation / ramp coordination,Network/deman
 Cooperative merging / coordinated gap creation / ramp coordination,Field experiment,0,,
 Cooperative merging / coordinated gap creation / ramp coordination,Test-track experiment,0,,
 Cooperative merging / coordinated gap creation / ramp coordination,Observational/open-road data,0,,
-Integrated longitudinal–lateral bottleneck control,Simulation,11,S002; S018; S023; S032; S035; S037; S039; S044; S049; S059; S061,M003; M025; M030; M045; M051; M054; M056; M062; M069; M084; M086
+Integrated longitudinal–lateral bottleneck control,Simulation,12,S002; S018; S023; S032; S035; S037; S039; S044; S049; S059; S061; S072,M003; M025; M030; M045; M051; M054; M056; M062; M069; M084; M086; M007
 Integrated longitudinal–lateral bottleneck control,Analytical/theoretical,8,S002; S018; S032; S035; S037; S044; S049; S061,M003; M025; M045; M051; M054; M062; M069; M086
 Integrated longitudinal–lateral bottleneck control,Network/demand model,0,,
 Integrated longitudinal–lateral bottleneck control,Field experiment,0,,
@@ -32,7 +32,7 @@ Integrated longitudinal–lateral bottleneck control,Observational/open-road dat
 Platooning,Simulation,7,S014; S017; S040; S047; S050; S051; S057,M021; M024; M057; M065; M070; M073; M082
 Platooning,Analytical/theoretical,5,S025; S034; S040; S050; S057,M032; M050; M057; M070; M082
 Platooning,Network/demand model,0,,
-Platooning,Field experiment,1,S047,M065
+Platooning,Field experiment,0,,
 Platooning,Test-track experiment,1,S034,M050
 Platooning,Observational/open-road data,0,,
 Routing / dynamic traffic assignment / managed-lane operation,Simulation,4,S051; S058; S067; S069,M073; M083; M092; M094

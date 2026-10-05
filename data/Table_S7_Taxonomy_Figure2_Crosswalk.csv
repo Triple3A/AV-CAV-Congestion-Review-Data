@@ -1,0 +1,32 @@
+﻿dimension,study_level_code,figure2_category,aggregation_or_assignment_rule
+Congestion mechanism,Congestion onset,Congestion onset / breakdown,Aggregated with breakdown into one column.
+Congestion mechanism,Breakdown (including stochastic or traffic breakdown),Congestion onset / breakdown,Aggregated with congestion onset into one column.
+Congestion mechanism,Capacity drop,Capacity drop,One-to-one. Direct support requires a sustainable/reference pre-breakdown flow or capacity estimate compared with sustained post-breakdown or queue discharge under comparable conditions; throughput gains alone are not coded here.
+Congestion mechanism,Queue formation,Queue formation / discharge,Aggregated with post-breakdown discharge.
+Congestion mechanism,Post-breakdown (queue) discharge,Queue formation / discharge,Aggregated with queue formation.
+Congestion mechanism,Stop-and-go waves (legacy variants: stop-and-go waves / flow stability; phantom jams; jam waves),Stop-and-go waves,One-to-one; legacy variants are synonyms.
+Congestion mechanism,String instability,String instability,One-to-one.
+Congestion mechanism,Lane-changing friction (legacy variant: lane-changing friction / gaps),Lane-changing friction,One-to-one.
+Congestion mechanism,Merging turbulence,Merging turbulence,One-to-one.
+Congestion mechanism,Physical network spillback,Physical spillback,One-to-one. Requires a queue boundary relative to finite storage; kept separate from redistribution.
+Congestion mechanism,Shifted or redistributed congestion,Shifted / redistributed congestion,One-to-one. A finding that congestion merely moved elsewhere is not a positive mitigation finding.
+Congestion mechanism,Bottleneck activation / throughput loss (supplementary Table S2 label),No fixed column,"Assigned per relationship in Table S5 to onset/breakdown, capacity drop or queue formation/discharge only when the publication supports that mechanism; throughput loss alone is a metric, not a mechanism."
+Congestion mechanism,Shockwave propagation (supplementary Table S2 label),Stop-and-go waves or Queue formation / discharge,Assigned per relationship: oscillatory waves to stop-and-go waves; an upstream-moving queue boundary to queue formation/discharge.
+Congestion mechanism,Network congestion distribution (supplementary Table S2 label),Shifted / redistributed congestion,Only when relocated loading or delay is reported; otherwise no column.
+Congestion mechanism,Induced demand / VMT (supplementary Table S2 label),Shifted / redistributed congestion,Only when the added travel is shown to load other links or periods; otherwise no column.
+Congestion mechanism,Queueing / delay (legacy Table S2 label),Queue formation / discharge,"Only when queue length, extent or discharge is reported; delay alone is a metric."
+Operational application,Traffic smoothing,Traffic smoothing / mobile actuator,Grouped with mobile-actuator control.
+Operational application,Mobile-actuator control,Traffic smoothing / mobile actuator,"Grouped with traffic smoothing. Studies of deployed (commercial) ACC that test whether onboard controllers damp or amplify disturbances are placed here, not in platooning."
+Operational application,Speed harmonization,Speed harmonization / dynamic headway / bottleneck-inflow regulation,Grouped with dynamic headway control and bottleneck-inflow regulation.
+Operational application,Dynamic headway control,Speed harmonization / dynamic headway / bottleneck-inflow regulation,Grouped as above.
+Operational application,Bottleneck-inflow regulation,Speed harmonization / dynamic headway / bottleneck-inflow regulation,Grouped as above.
+Operational application,Lane assignment or lane-use control,Lane assignment / lane-use control,One-to-one. Covers assignment of individual vehicles to lanes and lane-change control; dedicated or reserved AV/CACC lanes are managed-lane operation.
+Operational application,Cooperative merging,Cooperative merging / coordinated gap creation / ramp coordination,Grouped with coordinated gap creation and ramp coordination.
+Operational application,Coordinated gap creation,Cooperative merging / coordinated gap creation / ramp coordination,Grouped as above.
+Operational application,Ramp coordination,Cooperative merging / coordinated gap creation / ramp coordination,Grouped as above (not with platooning).
+Operational application,Integrated longitudinal–lateral bottleneck control,Integrated longitudinal–lateral bottleneck control,One-to-one. Study-level code for joint speed/headway and lane-change or merge control at one bottleneck (listed in Appendix B).
+Operational application,Platooning,Platooning,One-to-one. Formation or string-level coordination of CACC/platoon strings; a study that combines platooning with merging is coded in both families.
+Operational application,Routing or dynamic traffic assignment,Routing / dynamic traffic assignment / managed-lane operation,Grouped with managed-lane operation.
+Operational application,Managed-lane operation (including dedicated or reserved AV/CACC lanes),Routing / dynamic traffic assignment / managed-lane operation,Grouped with routing/DTA.
+Operational application,Perimeter or corridor control,Perimeter / corridor / fleet rebalancing,Grouped with fleet rebalancing.
+Operational application,Fleet rebalancing,Perimeter / corridor / fleet rebalancing,Grouped with perimeter/corridor control.

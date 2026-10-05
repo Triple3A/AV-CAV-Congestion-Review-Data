@@ -1,4 +1,4 @@
-Coding dimension,Agreements,Eligible comparisons,Disagreements,Exact-set agreement (%),Mean Jaccard similarity (secondary set-overlap diagnostic),Adjudication note
+﻿Coding dimension,Agreements,Eligible comparisons,Disagreements,Exact-set agreement (%),Mean Jaccard similarity (secondary set-overlap diagnostic),Adjudication note
 Evidence role,19,19,0,100.0,—,"No disagreements. Separately, the 11 audit reassessments from [D] to [M] were re-checked against the role definitions (evidence_role_reconciliation.csv): 10 were confirmed as [M] and one was restored to [D]."
 Congestion mechanism,2,19,17,10.5,0.47,"All 17 disagreements were adjudicated: lead code kept in 2, second-author code adopted in 3, combined or revised code in 12; 15 final record(s) changed."
 AV/CAV decision lever,8,19,11,42.1,0.60,"All 11 disagreements were adjudicated: lead code kept in 0, second-author code adopted in 5, combined or revised code in 6; 11 final record(s) changed."

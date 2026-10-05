@@ -1,5 +1,5 @@
 ﻿stage,records_entering,records_removed,records_remaining,principal_reason
-"Candidate discovery, TRID validation, and closest-comparator review",260,0,260,"260 unique candidate records were identified through AI-assisted discovery, citation tracing, TRID validation, and the closest-comparator review check."
-Manual bibliographic verification and deduplication,260,38,222,"38 duplicate, substantially overlapping, or unverifiable records were removed; 222 verified records remained."
-Manual eligibility assessment,222,125,97,"125 verified records were excluded as outside the review scope or insufficiently relevant; 97 publications remained."
-Final retained manuscript corpus,97,0,97,97 publications are retained in the final manuscript and listed in Table_S2_Retained_Corpus.csv.
+"Candidate discovery, TRID validation, closest-comparator review, and targeted coverage check",266,0,266,"266 unique candidate records were identified through AI-assisted discovery, citation tracing, TRID validation, the closest-comparator review check, and a targeted coverage check that added six records."
+Manual bibliographic verification and deduplication,266,38,228,"38 duplicate, substantially overlapping, or unverifiable records were removed; 228 verified records remained."
+Manual eligibility assessment,228,129,99,129 verified records were excluded as outside the review scope or insufficiently relevant; 99 publications remained.
+Final retained manuscript corpus,99,0,99,99 publications are retained in the final manuscript and listed in Table_S2_Retained_Corpus.csv.

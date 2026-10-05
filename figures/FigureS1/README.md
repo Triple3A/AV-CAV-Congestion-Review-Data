@@ -8,7 +8,7 @@ Sources (repository `data/` folder):
 
 This version replaces the earlier heatmap, which counted corpus-level operational-application codes rather than the audit families used in the manuscript text and Figure 2.
 
-Of the 71 audited studies, 70 have at least one coded relationship. Daganzo et al. (2002) contributes to three families but has no controlled evidence setting in Table S2, so it appears in the family totals but in no setting column. A zero means no coded combination in this corpus, not that no such evidence exists.
+Of the 77 audited studies, 76 have at least one coded relationship. The October 2026 coverage update added six audited studies (Cai et al., 2024; Jang et al., 2025; Stern et al., 2018; Vishnoi et al., 2024; Wang et al., 2025; Wu et al., 2022), which adds the field-experiment counts for traffic smoothing (Jang et al., 2025) and speed harmonization (Wang et al., 2025) and the test-track count for traffic smoothing (Stern et al., 2018). Families count both direct and indirect relationships, so the final-QA directness changes do not alter family membership; the evidence-setting corrections (Shladover et al., 2012, simulation only) remove one platooning × field count. Daganzo et al. (2002) contributes to three families but has no controlled evidence setting in Table S2, so it appears in the family totals but in no setting column. A zero means no coded combination in this corpus, not that no such evidence exists.
 
 Files:
 - `Figure_S1.png` (600 dpi), `Figure_S1.svg`, `Figure_S1.pdf`: the figure.

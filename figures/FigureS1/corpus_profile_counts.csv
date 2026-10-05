@@ -1,21 +1,21 @@
-dimension,category,study_count,percent_of_97
-review_role,[D],61,62.9
-review_role,[M],26,26.8
-review_role,[C],10,10.3
-evidence_setting,Simulation,70,72.2
-evidence_setting,Analytical/theoretical,57,58.8
-evidence_setting,Network/demand model,8,8.2
-evidence_setting,Field experiment,3,3.1
-evidence_setting,Test-track experiment,2,2.1
+dimension,category,study_count,percent_of_99
+review_role,[D],62,62.6
+review_role,[M],27,27.3
+review_role,[C],10,10.1
+evidence_setting,Simulation,71,71.7
+evidence_setting,Analytical/theoretical,56,56.6
+evidence_setting,Network/demand model,7,7.1
+evidence_setting,Field experiment,3,3.0
+evidence_setting,Test-track experiment,2,2.0
 evidence_setting,Observational/open-road data,1,1.0
-operational_application,Traffic smoothing / mobile-actuator control,19,
-operational_application,Speed harmonization / dynamic headway / bottleneck-inflow regulation,33,
-operational_application,Lane assignment / lane-use control,5,
-operational_application,Cooperative merging / coordinated gap creation / ramp coordination,18,
-operational_application,Integrated longitudinal–lateral bottleneck control,18,
-operational_application,Platooning,8,
+operational_application,Traffic smoothing / mobile-actuator control,21,
+operational_application,Speed harmonization / dynamic headway / bottleneck-inflow regulation,34,
+operational_application,Lane assignment / lane-use control,6,
+operational_application,Cooperative merging / coordinated gap creation / ramp coordination,17,
+operational_application,Integrated longitudinal–lateral bottleneck control,20,
+operational_application,Platooning,12,
 operational_application,Routing / dynamic traffic assignment / managed-lane operation,13,
 operational_application,Perimeter/corridor control / fleet rebalancing,2,
-coverage,At least one operational-application family,79,
-coverage,Not applicable (review/context study),1,
-coverage,Could not be assigned to the six controlled settings,5,
+coverage,At least one operational-application family,81,
+coverage,Not applicable (review/context study),6,
+coverage,Could not be assigned to the six controlled settings,3,

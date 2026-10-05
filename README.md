@@ -2,7 +2,7 @@
 
 This repository contains the study-level coding and supporting synthesis files for:
 
-**Autonomous Vehicles as Active Agents for Congestion Mitigation: A Review of Longitudinal, Lateral, Cooperative, and Learning-Based Traffic Control Strategies**
+**Autonomous Vehicles as Active Congestion-Control Agents: A Mechanism-Based Review of Freeway Bottlenecks in Mixed Traffic**
 
 **Authors:** Amirali Ataee Naeini, Ashkan Teymouri, and Michael H. Zhang
 
@@ -12,11 +12,11 @@ The review examines how autonomous and connected automated vehicles may act as t
 
 The literature review followed a semi-systematic process. AI-assisted literature discovery was combined with manual bibliographic verification, eligibility screening, coding and narrative synthesis. Undermind AI and Perplexity were used only to identify candidate publications.
 
-The manuscript-linked corpus contains **97 retained publications**, selected in three steps:
+The manuscript-linked corpus contains **99 retained publications**, selected in three steps:
 
-- **260 candidate records** were identified.
-- **222 verified records** remained after bibliographic verification and deduplication.
-- **97 publications** were retained after eligibility assessment.
+- **266 candidate records** were identified.
+- **228 verified records** remained after bibliographic verification and deduplication.
+- **99 publications** were retained after eligibility assessment.
 
 ## Files
 
@@ -24,16 +24,21 @@ The file names match the supplementary tables cited in the manuscript's Data Ava
 
 | File | Content |
 |---|---|
-| `data/Table_S1_Verified_Screening_Matrix.csv` | The 222 verified records and their record-level screening disposition. |
-| `data/Table_S2_Retained_Corpus.csv` | The final retained corpus of 97 publications, with review roles (61 [D], 26 [M], 10 [C]), the nine taxonomy dimensions, and descriptive fields (key finding, main limitation, comparator/reference condition). |
+| `data/Table_S1_Verified_Screening_Matrix.csv` | The 228 verified records and their record-level screening disposition. |
+| `data/Table_S2_Retained_Corpus.csv` | The final retained corpus of 99 publications, with review roles (62 [D], 27 [M], 10 [C]), the nine taxonomy dimensions, and descriptive fields (key finding, main limitation, comparator/reference condition). |
 | `data/Table_S3_Screening_Flow.csv` | The record counts shown in Figure 1. |
 | `data/Table_S4_Application_Mechanism_Evidence_Map.csv` | One row per cell of the 8 × 9 application-family × congestion-mechanism map (Figure 2). Each row gives the final marker, the direct and indirect supporting studies, finding-pattern counts, evidence settings, representative metrics and a cell rationale. |
-| `data/Table_S5_Study_Application_Mechanism_Audit.csv` | The study-level application–mechanism audit of 71 retained studies. It has one row per study × family × mechanism relationship. Each row gives the directness (DIRECT, INDIRECT or NONE), a finding pattern for direct relationships, the supporting metric, the evidence setting, a full-text rationale and the source location. |
+| `data/Table_S5_Study_Application_Mechanism_Audit.csv` | The study-level application–mechanism audit of 77 retained studies. It has one row per study × family × mechanism relationship. Each row gives the directness (DIRECT, INDIRECT or NONE), a finding pattern for direct relationships, the supporting metric, the evidence setting, a full-text rationale and the source location. |
 | `data/Table_S6_Independent_Coding_Agreement.csv` | Exact-set agreement between the lead author's coding and a second author's independent coding of a 19-study subset, by dimension, with mean Jaccard similarity as a secondary set-overlap diagnostic and an adjudication summary. |
 | `data/Table_S6_legacy_label_review.csv` | The 12 comparisons in which the frozen lead coding carried a label outside the final codebook, with how each was treated. None was excluded. |
 | `data/evidence_role_reconciliation.csv` | The re-check of the 11 audit reassessments from [D] to [M]: 10 were confirmed and one was restored to [D]. |
-| `data/independent_coding_check_adjudication.csv` | One row per disagreement (105 rows). Each row gives both coders' codes, the adjudicated code, the rationale, the full-text source, and which records changed. |
+| `data/independent_coding_check_adjudication.csv` | One row per disagreement (105 rows). Each row gives both coders' codes, the adjudicated code, the rationale and which records changed. |
+| `data/Table_S7_Taxonomy_Figure2_Crosswalk.csv` | Crosswalk from the study-level congestion-mechanism and operational-application codes (Appendix B and Table S2) to the nine Figure 2 mechanism columns and eight application families, with each aggregation rule. |
+| `data/qa_final_coding_changes.csv` | Every coding change made in the final pre-submission check and in the October 2026 coverage update, with the old and new value and the basis (execution rule, strict capacity-drop rule, evidence-setting check, reference metadata, added studies and full-text audit). |
+| `figures/Figure2/` | Figure 2 (SVG, PDF and 600 dpi PNG) and the script that draws it from Table S4. |
+| `figures/Figure3/` | Figure 3, the evaluation framework (SVG, PDF and 600 dpi PNG), and the script that draws it. Category lists in the figure are illustrative; `data/Table_S7_Taxonomy_Figure2_Crosswalk.csv` gives the full mapping. |
 | `figures/FigureS1/` | Supplementary Figure S1 with its source script and derived counts. See the README in that folder. |
+| `scripts/build_evidence_map.py` | Aggregates Table S5 into Table S4; writes `scripts/evidence_map_validation.json`. |
 | `docs/evidence_map_method.md` | The marker rules for Table S4 and Figure 2. |
 | `CODEBOOK.md` | Coding definitions and conventions. |
 
@@ -57,12 +62,19 @@ The review separates several concepts that are often grouped together in AV/CAV 
 
 The map is aggregated mechanically from the study-level audit in Table S5:
 
-- **●** at least two direct supporting studies, all with consistently positive findings;
+- **●** repeated, consistently positive direct support: at least two direct supporting studies, all coded consistently positive;
 - **○** one direct supporting study, or at least one direct finding that is mixed, negative or strongly conditional;
 - **□** indirect support only;
 - **—** no substantive relationship identified in the coded set.
 
-The final map contains 108 direct and 60 indirect study–cell links. It has 5 ●, 35 ○, 5 □ and 27 — cells.
+The final map contains 106 direct and 76 indirect study–cell links. It has 4 ●, 34 ○, 7 □ and 27 — cells.
+
+Rebuild Table S4 and Figure 2 with:
+
+```
+python scripts/build_evidence_map.py data/Table_S5_Study_Application_Mechanism_Audit.csv data/Table_S4_Application_Mechanism_Evidence_Map.csv
+python figures/Figure2/build_figure_2.py data/Table_S4_Application_Mechanism_Evidence_Map.csv figures/Figure2
+```
 
 Markers describe the pattern of support, not study quality or deployment readiness. See [`docs/evidence_map_method.md`](docs/evidence_map_method.md).
 
@@ -79,7 +91,24 @@ Mean Jaccard similarity (|A ∩ B| / |A ∪ B|) is reported separately as a seco
 
 In 12 comparisons the frozen lead coding carried a label outside the final codebook. One ("Queueing/delay") is old wording of "Queue formation / discharge" and was normalized before comparison. The other 11 are substantive or unresolved labels; they were kept and counted. No comparison was excluded. See `data/Table_S6_legacy_label_review.csv`.
 
+Finding pattern, which separates filled from open Figure 2 markers, agreed in 6 of 10 cells coded direct by both authors (60.0%).
+
 All 105 disagreements were resolved through discussion and adjudication using the coding definitions. The adjudicated codes are the ones in Tables S2, S4 and S5.
+
+## Final pre-submission check
+
+The final check applied two rules to every audit relationship (see `CODEBOOK.md` and `docs/evidence_map_method.md`):
+
+- **Execution rule.** A relationship is direct only when AVs/CAVs execute the controlled action, including infrastructure-computed commands that they execute automatically. Infrastructure-executed control and guidance that depends on human compliance give indirect support only.
+- **Strict capacity-drop rule.** Direct capacity-drop support needs a sustainable or reference pre-breakdown flow compared with sustained post-breakdown or queue discharge under comparable conditions.
+
+Nine audit relationships changed from direct to indirect, one study (Yang et al., 2018) changed from [D] to [M], and evidence settings were corrected for two experiments and five reviews. All changes are listed in `data/qa_final_coding_changes.csv`.
+
+## Coverage update (October 2026)
+
+A targeted coverage check added six candidate records to Table S1. One was retained (Jang et al., 2025) and five were excluded under the existing criteria, with the reason recorded in Table S1. Wang et al. (2025), a second study from the same 100-vehicle I-24 field test, was already in Table S1 but had been excluded without a recorded reason; it was reinstated as direct evidence. The corpus is now 99 publications (266 candidates, 228 verified, 129 excluded).
+
+Six studies were added to the application–mechanism audit from their full texts: the two new studies and four previously coded primary studies that had been outside the audit (Cai et al., 2024; Stern et al., 2018; Vishnoi et al., 2024; Wu et al., 2022). Three Table S2 fields were corrected from the full texts (Stern et al., 2018, decision lever and design method; Wu et al., 2022, decision lever and operational application; Vishnoi et al., 2024, facility context). Cai et al. (2024) is placed in integrated longitudinal–lateral control, which makes that family's merging-turbulence cell filled; placed in cooperative merging instead, the map would keep three filled cells. All changes are logged in `data/qa_final_coding_changes.csv`.
 
 ## Figure S1
 
@@ -97,15 +126,19 @@ Three retained references were not available in full text during the final corpu
 
 - Mahmassani (2016)
 - Richards (1956)
-- Treiber and Kesting (2012)
+- Treiber and Kesting (2013)
 
 These entries are flagged in `Table_S2_Retained_Corpus.csv`. No detailed study coding was inferred where the source could not be checked directly.
 
 Copyrighted article PDFs are not included in this repository.
 
+## Search audit trail
+
+> **To do before tagging the release (delete this note afterwards):** the manuscript's Methods describe a discovery audit trail (discovery dates, topic families, representative search formulations, citation tracing and the final TRID validation queries). It is not yet in this repository. Add it, for example as `docs/search_audit_trail.md`, and list it in the Files table.
+
 ## Citation
 
-Please cite the accompanying review and this repository when using the coding or synthesis files. Repository citation metadata are provided in `CITATION.cff`.
+Please cite the accompanying review and this repository when using the coding or synthesis files. Repository citation metadata are provided in `CITATION.cff`. Cite the tagged release that accompanies the submitted manuscript rather than the moving `main` branch.
 
 ## License
 
